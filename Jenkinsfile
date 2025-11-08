@@ -3,12 +3,18 @@ pipeline {
 
     stages {
         stage('Clone Code') {
-            steps {
-                // ✅ Use plain Git URL (no markdown)
-                git branch: 'main', url: 'https://github.com/s4fmoumbe/Lab-two-tier-app.git'
-            }
-        }
-
+    steps {
+        git branch: 'main', url: 'https://github.com/s4fmoumbe/Lab-two-tier-app.git'
+        sh '''
+            echo "=== Current directory ==="
+            pwd
+            echo "=== Listing cloned files ==="
+            ls -la
+            echo "=== Git status ==="
+            git status
+        '''
+    }
+}
         stage('Build Docker Image') {
             steps {
                 script {
